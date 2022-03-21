@@ -3,16 +3,31 @@ public class SudokuValidator
 {
 
     // Function to check whether sudoku string is valid or not
-    // Flag_Status: The body of the function is needed to be written and implemented
-    static boolean sudokuIsValid( String sudoku )
+    // Flag_Status: The body of the function is needed to be tested and improve the readability
+    static boolean isValid( String sudoku )
     {
-        String[] sudokuRowArray = new String[11];
-        String[] sudokuColumnArray = new String[18];
+        String[] sudokuRowArray = extractSudokuRows( sudoku );   // length:11
+        String[] sudokuColumnArray = extractSudokuColumns( sudoku ); // length: 18
 
-        sudokuRowArray = extractSudokuRows( sudoku );
-        sudokuColumnArray = extractSudokuColumns( sudoku );
+        boolean rowIsUnique = true;
+        boolean columnIsUnique = true;
 
-        // to be done
+        for(int index=0; index<11; index++)
+        {
+            rowIsUnique = isDuplicate( sudokuRowArray[index] );
+
+            if(!rowIsUnique)
+                return false;
+        }
+
+        for(int index=0; index<18; index++)
+        {
+            columnIsUnique = isDuplicate( sudokuColumnArray[index] );
+
+            if(!columnIsUnique)
+                return false;
+        }
+
         return true;
     }
 
@@ -103,8 +118,17 @@ public class SudokuValidator
     }
 
     // Function to check whether sudoku string is complete or not
-    static boolean sudokuIsComplete( String sudoku )
+    static boolean isComplete( String sudoku )
     {
+        char[] sudokuCharacters = sudoku.toCharArray();
+        int length = sudokuCharacters.length;
+
+        for(int index=0; index<length; index++)
+        {
+            if(sudokuCharacters[index] == '0')
+                return false;
+        }
+
         return true;
     }
 
@@ -127,6 +151,30 @@ public class SudokuValidator
 
         System.out.println("String Length: " + validIncompleteSudoku.length());
         /*-------- Sample Strings --------*/
+
+        /*-------- Workflow --------*/
+
+        // check if the given sudoku string is valid or not
+        boolean sudokuIsValid = isValid( validIncompleteSudoku );
+        if( sudokuIsValid )
+        {
+            // checking whether the sudoku string is completed or not
+            boolean sudokuIsComplete = isComplete( validIncompleteSudoku );
+            if (sudokuIsComplete)
+            {
+                System.out.println("The given sudoku string is complete.");
+            }
+            else
+            {
+                System.out.println("The given sudoku string is incomplete.");
+            }
+        } else
+        {
+            System.out.println("The Given Sudoku string is not a valid.");
+        }
+
+
+        /*-------- Workflow --------*/
 
         /*-------- Game workflow --------*/
         /*
@@ -190,11 +238,10 @@ public class SudokuValidator
 
 
         /*          Test code for testing Row Extractor  */
-        String[] sudokuColumnArray = new String[18];
-        sudokuColumnArray = extractSudokuColumns( validIncompleteSudoku );
-        int length = 18;
-        for(int index=0; index<length; index++)
-            System.out.println(sudokuColumnArray[index]);
+//        String[] sudokuColumnArray = extractSudokuColumns( validIncompleteSudoku );
+//        int length = 18;
+//        for(int index=0; index<length; index++)
+//            System.out.println(sudokuColumnArray[index]);
 
         /*-------- TESTING --------*/
     }
