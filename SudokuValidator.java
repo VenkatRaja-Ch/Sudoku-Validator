@@ -2,6 +2,34 @@
 public class SudokuValidator
 {
 
+    // Function to check whether sudoku string is valid or not
+    // Flag_Status: The body of the function is needed to be written and implemented
+    static boolean sudokuIsValid( String sudoku )
+    {
+        String[] sudokuRowArray = new String[11];
+        sudokuRowArray = extractSudokuRows( sudoku );
+
+        return true;
+    }
+
+    // Function to extract the rows of a string
+    // Flag_Status: The body of the function is needed to be written and implemented
+    static String[] extractSudokuRows( String sudoku )
+    {
+        String[] array = new String[11];
+
+        return array;
+    }
+
+    // Function to extract the columns of a string
+    // Flag_Status: The body of the function is needed to be written and implemented
+    static String[] sudokuColumns( String sudoku )
+    {
+        String[] array = new String[18];
+
+        return array;
+    }
+
     // Function to check whether Duplicate characters are present or not
     // Flag_Status : checked and working
     public static boolean isDuplicate(String passedString)
@@ -40,9 +68,11 @@ public class SudokuValidator
         return false;
     }
 
-    // 
-
-
+    // Function to check whether sudoku string is complete or not
+    static boolean sudokuIsComplete( String sudoku )
+    {
+        return true;
+    }
 
     // main function
     public static void main(String[] ar)
