@@ -17,7 +17,7 @@ public class SudokuValidator
     }
 
     // Function to extract the rows of a string
-    // Flag_Status: The function is checked and it is working
+    // Flag_Status: The function is checked, and it is working
     static String[] extractSudokuRows( String sudoku )
     {
         String[] rowsExtracted = new String[11];
@@ -37,12 +37,31 @@ public class SudokuValidator
     }
 
     // Function to extract the columns of a string
-    // Flag_Status: The body of the function is needed to be written and implemented
+    // Flag_Status: The function is checked, and it is working
     static String[] extractSudokuColumns( String sudoku )
     {
-        String[] array = new String[18];
+        String[] columnsExtracted = new String[18];
+        char[] columnPieces = sudoku.toCharArray();
+        int totalColumns = 18;
 
-        return array;
+        // to store each extracted column in the array
+        for( int currentColumnNumber=0; currentColumnNumber<totalColumns; currentColumnNumber++)
+        {
+            int index = currentColumnNumber;
+            String column = null;
+
+            // concatenate the pieces extracted from each row of that column
+            for( int indexJ=0; indexJ<11; indexJ++)
+            {
+                column += columnPieces[index];
+                index += 21;
+            }
+
+            // extract "null" from the string and store it in column
+            columnsExtracted[currentColumnNumber] = column.substring(4);
+        }
+
+        return columnsExtracted;
     }
 
     // Function to check whether Duplicate characters are present or not
@@ -168,6 +187,14 @@ public class SudokuValidator
 //        int length = 11;
 //        for(int index=0; index<length; index++)
 //            System.out.println(sudokuRowArray[index]);
+
+
+        /*          Test code for testing Row Extractor  */
+        String[] sudokuColumnArray = new String[18];
+        sudokuColumnArray = extractSudokuColumns( validIncompleteSudoku );
+        int length = 18;
+        for(int index=0; index<length; index++)
+            System.out.println(sudokuColumnArray[index]);
 
         /*-------- TESTING --------*/
     }
