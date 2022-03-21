@@ -17,10 +17,10 @@ public class SudokuValidator
     }
 
     // Function to extract the rows of a string
-    // Flag_Status: The body of the function is needed to be written and implemented
+    // Flag_Status: The function is checked and it is working
     static String[] extractSudokuRows( String sudoku )
     {
-        String[] rowsExtracted = new String[10];
+        String[] rowsExtracted = new String[11];
         String row = null;
         int startIndex = 0;
         int endIndex = 19;
@@ -142,24 +142,32 @@ public class SudokuValidator
 
         /*-------- TESTING --------*/
 
-        /*
-        System.out.println("Given Sudoku: \n" + validIncompleteSudoku + "\n");
 
-        boolean testForDuplicate = isDuplicate(test_Str_duplicateElements);
-        boolean testForUnique = isDuplicate(test_Str_uniqueElements);
+//        System.out.println("Given Sudoku: \n" + validIncompleteSudoku + "\n");
+//
+//        boolean testForDuplicate = isDuplicate(test_Str_duplicateElements);
+//        boolean testForUnique = isDuplicate(test_Str_uniqueElements);
+//
+//        if (( testForUnique )) {
+//            System.out.println("Duplicate  Found");
+//        } else {
+//            System.out.println("All Elements are unique");
+//        }
+//
+//        if(testForDuplicate){
+//            System.out.println("Duplicate  Found");
+//        } else {
+//            System.out.println("All Elements are unique");
+//        }
 
-        if (( testForUnique )) {
-            System.out.println("Duplicate  Found");
-        } else {
-            System.out.println("All Elements are unique");
-        }
 
-        if(testForDuplicate){
-            System.out.println("Duplicate  Found");
-        } else {
-            System.out.println("All Elements are unique");
-        }
-        */
+        /*          Test code for testing Row Extractor  */
+
+//        String[] sudokuRowArray = new String[11];
+//        sudokuRowArray = extractSudokuRows( validIncompleteSudoku );
+//        int length = 11;
+//        for(int index=0; index<length; index++)
+//            System.out.println(sudokuRowArray[index]);
 
         /*-------- TESTING --------*/
     }
