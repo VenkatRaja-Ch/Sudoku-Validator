@@ -7,8 +7,12 @@ public class SudokuValidator
     static boolean sudokuIsValid( String sudoku )
     {
         String[] sudokuRowArray = new String[11];
-        sudokuRowArray = extractSudokuRows( sudoku );
+        String[] sudokuColumnArray = new String[18];
 
+        sudokuRowArray = extractSudokuRows( sudoku );
+        sudokuColumnArray = extractSudokuColumns( sudoku );
+
+        // to be done
         return true;
     }
 
@@ -16,14 +20,25 @@ public class SudokuValidator
     // Flag_Status: The body of the function is needed to be written and implemented
     static String[] extractSudokuRows( String sudoku )
     {
-        String[] array = new String[11];
+        String[] rowsExtracted = new String[10];
+        String row = null;
+        int startIndex = 0;
+        int endIndex = 19;
 
-        return array;
+        for( int index=0; index<11; index++ )
+        {
+            row = sudoku.substring(startIndex, endIndex);
+            startIndex += 21;
+            endIndex += 21;
+            rowsExtracted[index] = row;
+        }
+
+        return rowsExtracted;
     }
 
     // Function to extract the columns of a string
     // Flag_Status: The body of the function is needed to be written and implemented
-    static String[] sudokuColumns( String sudoku )
+    static String[] extractSudokuColumns( String sudoku )
     {
         String[] array = new String[18];
 
@@ -127,6 +142,7 @@ public class SudokuValidator
 
         /*-------- TESTING --------*/
 
+        /*
         System.out.println("Given Sudoku: \n" + validIncompleteSudoku + "\n");
 
         boolean testForDuplicate = isDuplicate(test_Str_duplicateElements);
@@ -143,6 +159,7 @@ public class SudokuValidator
         } else {
             System.out.println("All Elements are unique");
         }
+        */
 
         /*-------- TESTING --------*/
     }
