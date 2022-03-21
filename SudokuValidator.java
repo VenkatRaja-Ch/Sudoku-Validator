@@ -40,6 +40,9 @@ public class SudokuValidator
         return false;
     }
 
+    // 
+
+
 
     // main function
     public static void main(String[] ar)
@@ -58,6 +61,7 @@ public class SudokuValidator
         String test_Str_duplicateElements = "8 5 0 |0 0 2 |4 4 0 "; // duplicate string test case
         String test_Str_uniqueElements = "8 5 0 |0 0 2 |4 0 0 "; // unique string test case
 
+        System.out.println("String Length: " + validIncompleteSudoku.length());
         /*-------- Sample Strings --------*/
 
         /*-------- Game workflow --------*/
