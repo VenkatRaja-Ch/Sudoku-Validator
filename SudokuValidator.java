@@ -1,4 +1,3 @@
-//import java.util.*;
 public class SudokuValidator
 {
 
@@ -9,22 +8,22 @@ public class SudokuValidator
         String[] sudokuRowArray = extractSudokuRows( sudoku );   // length:11
         String[] sudokuColumnArray = extractSudokuColumns( sudoku ); // length: 18
 
-        boolean rowIsUnique = true;
-        boolean columnIsUnique = true;
+        boolean rowIsNotUnique = true;
+        boolean columnIsNotUnique = true;
 
         for(int index=0; index<11; index++)
         {
-            rowIsUnique = isDuplicate( sudokuRowArray[index] );
+            rowIsNotUnique =  isDuplicate( sudokuRowArray[index] );
 
-            if(!rowIsUnique)
+            if(rowIsNotUnique)
                 return false;
         }
 
         for(int index=0; index<18; index++)
         {
-            columnIsUnique = isDuplicate( sudokuColumnArray[index] );
+            columnIsNotUnique = isDuplicate( sudokuColumnArray[index] );
 
-            if(!columnIsUnique)
+            if(columnIsNotUnique)
                 return false;
         }
 
@@ -93,7 +92,7 @@ public class SudokuValidator
         {
 
             //checks for non sudoku row. eg: "------+------+------"
-            boolean validRow = givenString[indexI] != '-';
+            boolean validRow = (givenString[indexI] != '-') &&  (givenString[indexI] != '|');
 
             if (validRow) {
 
@@ -104,7 +103,9 @@ public class SudokuValidator
                     duplicateFound = ( (givenString[indexI] == givenString[indexJ])
                             && (givenString[indexI]!=' ')
                             && (givenString[indexI]!='0')
-                            && (givenString[indexI]!='|') );
+                            && (givenString[indexI]!='|')
+                            && (givenString[indexI]!='-')
+                            && (givenString[indexI]!='+') );
 
                     // if found then return true
                     if(duplicateFound)
@@ -137,36 +138,55 @@ public class SudokuValidator
     {
 
         /*-------- Sample Strings --------*/
-        //                                    Row:1                    Row:2                      Row:3
+        //                                    Row:1                       Row:2                      Row:3
         String validIncompleteSudoku = "8 5 0 |0 0 2 |4 0 0 " + "\n" + "7 2 0 |0 0 0 |0 0 9 " + "\n" + "0 0 4 |0 0 0 |0 0 0 " + "\n" +
-                              //              Row:4                    Row:5                      Row:6
+                              //              Row:4                      Row:5                      Row:6
                                        "------+------+------" + "\n" + "0 0 0 |1 0 7 |0 0 2 " + "\n" + "3 0 5 |0 0 0 |9 0 0 " + "\n" +
-                              //              Row:7                    Row:8                      Row:9
+                              //              Row:7                      Row:8                      Row:9
                                        "0 4 0 |0 0 0 |0 0 0 " + "\n" + "------+------+------" + "\n" + "0 0 0 |0 8 0 |0 7 0 " + "\n" +
-                             //               Row:10                  Row:11
+                             //               Row:10                     Row:11
                                        "0 1 7 |0 0 0 |0 0 0 " + "\n" + "0 0 0 |0 3 6 |0 4 0 " + "\n";
+
+
+
+        //                                    Row:1                     Row:2                      Row:3
+        String validCompleteSudoku = "6 3 9 |5 7 4 |1 8 2 " + "\n" + "5 4 1 |8 2 9 |3 7 6 " + "\n" + "7 8 2 |6 1 3 |9 5 4 " + "\n" +
+                              //              Row:4                    Row:5                      Row:6
+                                     "------+------+------" + "\n" + "1 9 8 |4 6 7 |5 2 3 " + "\n" + "3 6 5 |9 8 2 |4 1 7 " + "\n" +
+                              //              Row:7                    Row:8                      Row:9
+                                     "4 2 7 |1 3 5 |8 6 9 " + "\n" + "------+------+------" + "\n" + "9 5 6 |7 4 8 |2 3 1 " + "\n" +
+                             //               Row:10                  Row:11
+                                     "8 1 3 |2 9 6 |7 4 5 " + "\n" + "2 7 4 |3 5 1 |6 9 8 " + "\n";
+
+        //                                    Row:1                     Row:2                      Row:3
+        String invalidSudoku = "6 3 9 |5 7 7 |1 8 2 " + "\n" + "5 4 1 |8 2 9 |3 7 6 " + "\n" + "7 8 2 |6 1 3 |9 5 4 " + "\n" +
+                            //              Row:4                    Row:5                      Row:6
+                            "------+------+------" + "\n" + "1 9 8 |4 6 7 |5 2 3 " + "\n" + "3 6 5 |9 8 2 |4 1 7 " + "\n" +
+                            //              Row:7                    Row:8                      Row:9
+                            "4 2 7 |1 3 5 |8 6 9 " + "\n" + "------+------+------" + "\n" + "9 5 6 |7 4 8 |2 3 1 " + "\n" +
+                            //               Row:10                  Row:11
+                            "8 1 3 |2 9 6 |7 4 5 " + "\n" + "2 7 4 |3 5 1 |6 9 8 " + "\n";
 
         String test_Str_duplicateElements = "8 5 0 |0 0 2 |4 4 0 "; // duplicate string test case
         String test_Str_uniqueElements = "8 5 0 |0 0 2 |4 0 0 "; // unique string test case
 
-        System.out.println("String Length: " + validIncompleteSudoku.length());
         /*-------- Sample Strings --------*/
 
         /*-------- Workflow --------*/
 
         // check if the given sudoku string is valid or not
-        boolean sudokuIsValid = isValid( validIncompleteSudoku );
+        boolean sudokuIsValid = isValid( validCompleteSudoku );
         if( sudokuIsValid )
         {
             // checking whether the sudoku string is completed or not
-            boolean sudokuIsComplete = isComplete( validIncompleteSudoku );
+            boolean sudokuIsComplete = isComplete( validCompleteSudoku );
             if (sudokuIsComplete)
             {
-                System.out.println("The given sudoku string is complete.");
+                System.out.println("The given sudoku string is valid and complete.");
             }
             else
             {
-                System.out.println("The given sudoku string is incomplete.");
+                System.out.println("The given sudoku string is valid and incomplete.");
             }
         } else
         {
@@ -207,11 +227,11 @@ public class SudokuValidator
          */
         /*-------- Game workflow --------*/
 
-        /*-------- TESTING --------*/
 
+        /*-------- TEST CASES --------*/
 
-//        System.out.println("Given Sudoku: \n" + validIncompleteSudoku + "\n");
-//
+        /*          Test code for testing duplicate elements in the strings  */
+
 //        boolean testForDuplicate = isDuplicate(test_Str_duplicateElements);
 //        boolean testForUnique = isDuplicate(test_Str_uniqueElements);
 //
@@ -237,12 +257,12 @@ public class SudokuValidator
 //            System.out.println(sudokuRowArray[index]);
 
 
-        /*          Test code for testing Row Extractor  */
+        /*          Test code for testing Column Extractor  */
 //        String[] sudokuColumnArray = extractSudokuColumns( validIncompleteSudoku );
 //        int length = 18;
 //        for(int index=0; index<length; index++)
 //            System.out.println(sudokuColumnArray[index]);
 
-        /*-------- TESTING --------*/
+        /*-------- TEST CASES --------*/
     }
 }
